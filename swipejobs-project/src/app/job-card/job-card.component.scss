@@ -48,6 +48,34 @@
   margin: 12px 0;
 }
 
+.accept-button, .reject-button{
+  height: 48px;
+  font-size: 16px;
+  width: 100%;
+  max-width: 140px;
+  font-weight: lighter;
+}
+
+.reject-button{
+  border-color: grey;
+  color: grey;
+}
+
+.accept-button{
+  background-color: black;
+  color: white;
+}
+
+.action-section{
+  height: 72px;
+  padding: 16px;
+}
+
+.scroll-section{
+  max-height: calc(100vh - 72px);
+  overflow: scroll;
+}
+
 .job-basic-info-section{
   background-color: rgb(0, 230, 184);
   padding: 12px;

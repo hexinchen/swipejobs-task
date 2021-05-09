@@ -10,6 +10,10 @@ import { JobCardComponent } from './job-card/job-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import { DialogComponent } from './dialog/dialog.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatButtonModule} from '@angular/material/button';
+
 
 
 
@@ -17,7 +21,8 @@ import {MatDividerModule} from '@angular/material/divider';
   declarations: [
     AppComponent,
     TopBannerComponent,
-    JobCardComponent
+    JobCardComponent,
+    DialogComponent
   ],
   imports: [
     BrowserModule,
@@ -27,7 +32,9 @@ import {MatDividerModule} from '@angular/material/divider';
     HttpClientModule,
     MatIconModule,
     MatDividerModule,
-    HammerModule
+    HammerModule,
+    MatSnackBarModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

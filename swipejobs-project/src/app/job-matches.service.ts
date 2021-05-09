@@ -51,4 +51,12 @@ export class JobMatchesService {
   getJobMatchesByUserId(userId: string): Observable<WorkMatch[]>{
     return this.http.get(`https://test.swipejobs.com/api/worker/${userId}/matches`) as Observable<WorkMatch[]>;
   }
+
+  acceptJobById(userId: string, jobId: string): Promise<any>{
+    return this.http.get(`https://test.swipejobs.com/api/worker/${userId}/job/${jobId}/accept`).toPromise();
+  }
+
+  rejectJobById(userId: string, jobId: string): Promise<any>{
+    return this.http.get(`https://test.swipejobs.com/api/worker/${userId}/job/${jobId}/reject`).toPromise();
+  }
 }

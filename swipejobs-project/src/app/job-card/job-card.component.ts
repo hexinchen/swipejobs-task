@@ -1,4 +1,5 @@
 import { Component, OnInit, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobMatchesService, WorkMatch } from '../job-matches.service';
 import { UserService, WorkerProfile } from '../user.service';
 
@@ -11,10 +12,11 @@ import { UserService, WorkerProfile } from '../user.service';
 export class JobCardComponent implements OnInit {
 
   constructor(private userService: UserService,
-    private jobMatchesService: JobMatchesService) {
+    private jobMatchesService: JobMatchesService,
+    private snackBar: MatSnackBar) {
       this.myDate = new Date();
      }
-  user: WorkerProfile | null = null;
+  user!: WorkerProfile;
   jobMatchs: WorkMatch[] = [];
   currentJob: WorkMatch | null = null;
   myDate: Date;
@@ -58,6 +60,16 @@ export class JobCardComponent implements OnInit {
     }else{
       this.currentJob = this.jobMatchs[this.jobMatchs.findIndex(job => job.jobId === this.currentJob?.jobId) + 1];
     }
+  }
+
+  async acceptJob(): Promise<void>{
+    const res = await this.jobMatchesService.acceptJobById(this.user.workerId, this.currentJob!.jobId);
+    this.snackBar.open(res.success ? 'Accepted!' : res.message, 'OK');
+  }
+
+  async rejectJob(): Promise<void>{
+    const res = await this.jobMatchesService.rejectJobById(this.user.workerId, this.currentJob!.jobId);
+    this.snackBar.open(res.success ? 'Rejected.' : res.message, 'OK');
   }
 
 }
