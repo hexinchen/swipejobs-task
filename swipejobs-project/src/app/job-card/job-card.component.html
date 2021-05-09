@@ -1,0 +1,28 @@
+<div class="card-container" fxLayout="column" fxLayouAlign="start stretch">
+  <div>
+    <img [src]="currentJob?.jobTitle?.imageUrl" />
+  </div>
+  <span class="job-name">{{currentJob?.jobTitle?.name}}</span>
+  <span class="company-name">{{currentJob?.company?.name}}</span>
+  <div class="job-basic-info-section" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="8px">
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <span class="title">Distance</span>
+      <span class="title">Hourly Rate</span>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="space-between start">
+      <span class="content">{{currentJob?.roundedMilesToTravel}} miles</span>
+      <div fxLayout="row" fxLayoutAlign="space-between start" fxLayoutGap="4px">
+        <span class="dollar-sign">$</span>
+        <span class="content">{{currentJob?.wagePerHourInDollar}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="job-details-section" fxLayout="column" fxLayoutAlign="start stretch">
+    <div fxLayout="row" fxLayoutAlign="start center">
+      <mat-icon aria-hidden="false" aria-label="event-icon">event</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <span>Shift Dates</span>
+      </div>
+    </div>
+  </div>
+</div>

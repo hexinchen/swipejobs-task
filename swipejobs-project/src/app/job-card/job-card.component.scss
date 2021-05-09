@@ -1,0 +1,32 @@
+.job-name{
+  font-weight: bold;
+  font-size: 18px;
+  padding: 4px 8px;
+}
+
+.company-name{
+  font-size: 14px;
+  padding: 4px 8px;
+}
+
+.job-basic-info-section{
+  background-color: rgb(104, 206, 171);
+  padding: 8px;
+  .title{
+    font-size: 10px;
+    font-weight: bold;
+  }
+
+  .dollar-sign{
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+  };
+
+  .content{
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    line-height: 28px;
+  }
+}
