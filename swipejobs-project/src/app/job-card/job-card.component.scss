@@ -1,17 +1,34 @@
 .job-name{
   font-weight: bold;
   font-size: 18px;
-  padding: 4px 8px;
+  padding: 4px 12px;
 }
 
 .company-name{
   font-size: 14px;
-  padding: 4px 8px;
+  padding: 4px 12px;
+}
+
+.job-details-section{
+  padding: 12px;
+}
+
+.next-job-icon{
+  cursor: pointer;
+}
+
+.tiny-title{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.divider{
+  margin: 12px 0;
 }
 
 .job-basic-info-section{
   background-color: rgb(104, 206, 171);
-  padding: 8px;
+  padding: 12px;
   .title{
     font-size: 10px;
     font-weight: bold;

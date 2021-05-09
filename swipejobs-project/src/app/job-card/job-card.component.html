@@ -1,4 +1,4 @@
-<div class="card-container" fxLayout="column" fxLayouAlign="start stretch">
+<div class="card-container" fxLayout="column" fxLayouAlign="start stretch"  (swipeleft)="nextJob()">
   <div>
     <img [src]="currentJob?.jobTitle?.imageUrl" />
   </div>
@@ -18,10 +18,42 @@
     </div>
   </div>
   <div class="job-details-section" fxLayout="column" fxLayoutAlign="start stretch">
-    <div fxLayout="row" fxLayoutAlign="start center">
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
       <mat-icon aria-hidden="false" aria-label="event-icon">event</mat-icon>
       <div fxLayout="column" fxLayoutAlign="start start">
-        <span>Shift Dates</span>
+        <span class="tiny-title">Shift Dates</span>
+        <span *ngFor="let shift of currentJob?.shifts">{{shift.formattedStartTime | date:'MMM d, EEE  h:mm aaa': '-0700'}} - {{shift.formattedEndTime | date: 'h:mm aaa':'-0700'}} PDT</span>
+      </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <mat-icon aria-hidden="false" aria-label="place-icon">place</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <span class="tiny-title">Location</span>
+        <span>{{currentJob?.company?.address?.formattedAddress}}</span>
+        <span>{{currentJob?.preciseMilesToTravel}} miles from your job search location</span>
+      </div>
+      <mat-icon (click)="nextJob()"  class="next-job-icon" aria-hidden="false" aria-label="arrow_forward_ios-icon"><span class="material-icons">
+        arrow_forward_ios
+        </span></mat-icon>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <mat-icon aria-hidden="false" aria-label="construction-icon">construction</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <span class="tiny-title">Requirements</span>
+        <div *ngIf="!currentJob?.requirements">-</div>
+        <div *ngIf="!!currentJob?.requirements" fxLayout="column" fxLayoutAlign="start start">
+          <span *ngFor="let requirement of currentJob?.requirements">- {{requirement}}</span>
+        </div>
+      </div>
+    </div>
+    <mat-divider class="divider"></mat-divider>
+    <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="12px">
+      <mat-icon aria-hidden="false" aria-label="account-circle-icon">account_circle</mat-icon>
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <span class="tiny-title">Report To</span>
+        <span>{{currentJob?.company?.reportTo?.name}} {{currentJob?.company?.reportTo?.phone}}</span>
       </div>
     </div>
   </div>

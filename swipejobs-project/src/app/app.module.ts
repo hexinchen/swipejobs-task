@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +9,9 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { JobCardComponent } from './job-card/job-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+
+
 
 @NgModule({
   declarations: [
@@ -22,7 +25,9 @@ import {MatIconModule} from '@angular/material/icon';
     BrowserAnimationsModule,
     FlexLayoutModule,
     HttpClientModule,
-    MatIconModule
+    MatIconModule,
+    MatDividerModule,
+    HammerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

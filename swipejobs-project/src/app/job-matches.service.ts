@@ -18,6 +18,8 @@ export interface Company {
 export interface Shift{
   startDate: string;
   endDate: string;
+  formattedStartTime?: Date;
+  formattedEndTime?: Date;
 };
 
 export interface WorkMatch{
@@ -31,9 +33,12 @@ export interface WorkMatch{
   wagePerHourInDollar?: string;
   milesToTravel?: number;
   roundedMilesToTravel?: string;
+  preciseMilesToTravel?: string;
   shifts?: Shift[];
   branch?: string;
   branchPhoneNumber?: string;
+  requirements?: string[];
+  isLast?: boolean;
 };
 
 @Injectable({
