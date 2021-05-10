@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule, HammerModule } from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,10 +13,6 @@ import {MatDividerModule} from '@angular/material/divider';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatButtonModule} from '@angular/material/button';
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +28,6 @@ import {MatButtonModule} from '@angular/material/button';
     HttpClientModule,
     MatIconModule,
     MatDividerModule,
-    HammerModule,
     MatSnackBarModule,
     MatButtonModule
   ],

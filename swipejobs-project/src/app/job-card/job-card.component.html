@@ -1,4 +1,4 @@
-<div class="card-container" fxLayout="column" fxLayouAlign="start stretch" (swipeleft)="nextJob()">
+<div class="card-container" fxLayout="column" fxLayouAlign="start stretch" id="swipableElement">
 
     <img class="job-image" [src]="currentJob?.jobTitle?.imageUrl" />
     <span class="job-name">{{currentJob?.jobTitle?.name}}</span>
@@ -60,12 +60,9 @@
             {{currentJob?.company?.reportTo?.phone}}</span>
         </div>
       </div>
+      <div fxLayout="row" fxLayoutAlign="space-between center" class="action-section" fxLayoutGap="12px">
+        <button mat-stroked-button class="reject-button" (click)="rejectJob()">No Thanks</button>
+        <button mat-flat-button class="accept-button" (click)="acceptJob()">I'll Take It</button>
+      </div>
     </div>
-
-
-
-  <div fxLayout="row" fxLayoutAlign="space-between center" class="action-section" fxLayoutGap="12px">
-    <button mat-stroked-button class="reject-button" (click)="rejectJob()">No Thanks</button>
-    <button mat-flat-button class="accept-button" (click)="acceptJob()">I'll Take It</button>
-  </div>
 </div>

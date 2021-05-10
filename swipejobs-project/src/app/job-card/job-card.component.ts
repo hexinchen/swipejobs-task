@@ -1,4 +1,4 @@
-import { Component, OnInit, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
+import { Component, ElementRef, OnInit, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JobMatchesService, WorkMatch } from '../job-matches.service';
 import { UserService, WorkerProfile } from '../user.service';
@@ -13,13 +13,43 @@ export class JobCardComponent implements OnInit {
 
   constructor(private userService: UserService,
     private jobMatchesService: JobMatchesService,
-    private snackBar: MatSnackBar) {
-      this.myDate = new Date();
-     }
+    private snackBar: MatSnackBar,
+    private elementRef: ElementRef) {
+
+  }
   user!: WorkerProfile;
   jobMatchs: WorkMatch[] = [];
   currentJob: WorkMatch | null = null;
-  myDate: Date;
+  xDown: number | null = null;
+
+  ngAfterViewInit() {
+    const swipableElement = document.getElementById('swipableElement');
+    if (swipableElement) {
+      swipableElement.addEventListener('touchstart', this.handleTouchStart.bind(this), false);
+      swipableElement.addEventListener('touchmove', this.handleTouchMove.bind(this))
+    }
+  }
+
+
+  handleTouchStart(event: TouchEvent) {
+    const firstTouch = event.touches[0];
+    this.xDown = firstTouch.clientX;
+  }
+
+  handleTouchMove(event: TouchEvent): void {
+    if (!this.xDown) {
+      return;
+    }
+
+    const xUp: number = event.touches[0].clientX;
+    const xDiff: number = this.xDown! - xUp;
+
+    if(xDiff > 0){
+      this.nextJob();
+    }
+
+    this.xDown = null;
+  }
 
   async ngOnInit(): Promise<void> {
     const userProfileResponse: WorkerProfile = await this.userService.getUserProfile().toPromise();
@@ -54,20 +84,20 @@ export class JobCardComponent implements OnInit {
 
   }
 
-  nextJob(): void{
-    if(this.currentJob?.isLast){
+  nextJob(): void {
+    if (this.currentJob?.isLast) {
       this.currentJob = this.jobMatchs[0];
-    }else{
+    } else {
       this.currentJob = this.jobMatchs[this.jobMatchs.findIndex(job => job.jobId === this.currentJob?.jobId) + 1];
     }
   }
 
-  async acceptJob(): Promise<void>{
+  async acceptJob(): Promise<void> {
     const res = await this.jobMatchesService.acceptJobById(this.user.workerId, this.currentJob!.jobId);
     this.snackBar.open(res.success ? 'Accepted!' : res.message, 'OK');
   }
 
-  async rejectJob(): Promise<void>{
+  async rejectJob(): Promise<void> {
     const res = await this.jobMatchesService.rejectJobById(this.user.workerId, this.currentJob!.jobId);
     this.snackBar.open(res.success ? 'Rejected.' : res.message, 'OK');
   }
