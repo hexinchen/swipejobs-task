@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ɵSWITCH_RENDERER2_FACTORY__POST_R3__, ɵSWITCH_VIEW_CONTAINER_REF_FACTORY__POST_R3__ } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { first } from 'rxjs/operators';
 import { JobMatchesService, WorkMatch } from '../job-matches.service';
 import { UserService, WorkerProfile } from '../user.service';
 
@@ -21,6 +22,7 @@ export class JobCardComponent implements OnInit {
   jobMatchs: WorkMatch[] = [];
   currentJob: WorkMatch | null = null;
   xDown: number | null = null;
+  yDown: number | null = null;
 
   ngAfterViewInit() {
     const swipableElement = document.getElementById('swipableElement');
@@ -34,21 +36,27 @@ export class JobCardComponent implements OnInit {
   handleTouchStart(event: TouchEvent) {
     const firstTouch = event.touches[0];
     this.xDown = firstTouch.clientX;
+    this.yDown = firstTouch.clientY;
   }
 
   handleTouchMove(event: TouchEvent): void {
-    if (!this.xDown) {
+    if (!this.xDown || !this.yDown) {
       return;
     }
 
     const xUp: number = event.touches[0].clientX;
+    const yUp: number = event.touches[0].clientY;
     const xDiff: number = this.xDown! - xUp;
+    const yDiff: number = this.yDown! - yUp;
 
-    if(xDiff > 0){
-      this.nextJob();
+    if ( Math.abs( xDiff ) > Math.abs( yDiff ) ){
+      if(xDiff > 0){
+        this.nextJob();
+      }
     }
 
     this.xDown = null;
+    this.yDown = null;
   }
 
   async ngOnInit(): Promise<void> {
